@@ -13,7 +13,7 @@ const App = {
         },
 
         addNewNote() {
-            if (this.inputValue !== '') {
+            if (this.inputValue === '') {
                 return;
             }
             this.notes.push(this.inputValue);
