@@ -27,7 +27,7 @@
 <!--        >Изменить название-->
 <!--        </button>-->
 
-        <ul class="list" v-if="items.length">
+        <ul class="list" v-show="items.length">
             <li
                     class="list-item"
                     v-for="(item, i) in items"
@@ -36,7 +36,7 @@
                 <strong>{{ i }}</strong> {{ item }}
             </li>
         </ul>
-        <h3 v-else>Элементов нет</h3>
+        <h3 v-show="!items.length">Элементов нет</h3>
     </div>
 </div>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
