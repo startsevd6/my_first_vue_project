@@ -33,7 +33,8 @@
                     v-for="(item, i) in items"
                     @click="items.splice(i, 1)"
             >
-                <strong>{{ i }}</strong> {{ item }}
+                <strong>{{ item }}</strong>&nbsp;
+                <input type="text">
             </li>
         </ul>
         <h3 v-show="!items.length">Элементов нет</h3>
