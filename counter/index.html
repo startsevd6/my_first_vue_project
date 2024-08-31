@@ -34,7 +34,7 @@
                     @click="items.splice(i, 1)"
             >
                 <strong>{{ item }}</strong>&nbsp;
-                <input type="text">
+                <input type="text" @click.prevent.stop>
             </li>
         </ul>
         <h3 v-show="!items.length">Элементов нет</h3>
