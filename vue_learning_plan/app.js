@@ -62,25 +62,29 @@ const app = Vue.createApp({
     },
     methods: {
         moveToNextStep() {
+            currentStep++
+
             if (currentStep > 1) {
                 this.$forceUpdate()
             }
+            if (currentStep > 5) {
+                alert('Поздравляем вы изучили основные темы Vue')
+            }
 
-            currentStep++
             console.log(currentStep)
         },
 
         moveToPreviousStep() {
-            if (currentStep < 2) {
-                alert('До основ нет этапов.')
-                return
-            }
+            currentStep--
 
             if (currentStep < 2) {
                 this.$forceUpdate()
             }
+            if (currentStep < 1) {
+                currentStep = 1
+                alert('До основ нет этапов.')
+            }
 
-            currentStep--
             console.log(currentStep)
         }
     }
