@@ -15,17 +15,52 @@ const app = Vue.createApp({
             ]
         }
     },
+    methods: {
+        moveToNextStep() {
+            currentStep++
+
+            this.$forceUpdate()
+            if (currentStep > 5) {
+                alert('Поздравляем вы изучили основные темы Vue')
+            }
+
+            console.log(currentStep)
+        },
+
+        moveToPreviousStep() {
+            currentStep--
+
+            this.$forceUpdate()
+            if (currentStep < 1) {
+                currentStep = 1
+                alert('До основ нет этапов.')
+            }
+
+            console.log(currentStep)
+        },
+
+        moveToAnotherStep(step) {
+            currentStep = step
+            this.$forceUpdate()
+
+            console.log(currentStep)
+        }
+    },
     render() {
         let h1 = h('h1', {}, this.title)
 
-        let p = h('p', {}, this.description[currentStep - 1])
+        let p = h('p', {
+            style: 'display: flex; align-items: center; min-height: 109px;'
+        }, this.description[currentStep - 1])
 
         const descriptionsOfChildrenElements = ['Основы', 'Компоненты', 'Роутер', 'Vuex', 'Composition']
         const children = []
         for (let i = 0; i < descriptionsOfChildrenElements.length; i++) {
             children.push(
                 h('a', {
-                    style: 'display: flex; align-items: center; gap:10px;'
+                    href: '#',
+                    style: 'display: flex; align-items: center; gap:10px;',
+                    onclick: () => this.moveToAnotherStep(i+1)
                 }, [
                     h('div', {
                         class: {
@@ -67,30 +102,6 @@ const app = Vue.createApp({
         return h('div', {
             class: 'container'
         }, [h1, p, divWithStagesOfLearning, buttons])
-    },
-    methods: {
-        moveToNextStep() {
-            currentStep++
-
-            this.$forceUpdate()
-            if (currentStep > 5) {
-                alert('Поздравляем вы изучили основные темы Vue')
-            }
-
-            console.log(currentStep)
-        },
-
-        moveToPreviousStep() {
-            currentStep--
-
-            this.$forceUpdate()
-            if (currentStep < 1) {
-                currentStep = 1
-                alert('До основ нет этапов.')
-            }
-
-            console.log(currentStep)
-        }
     }
 })
 
