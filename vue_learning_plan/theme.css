@@ -119,8 +119,16 @@ h3 {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #42b983;
+    background: #CCC;
     color: #282828;
+}
+
+.circle.passed {
+    background: #42b983;
+}
+
+.circle.active {
+    color: #ffffff;
 }
 
 .container {

@@ -23,8 +23,11 @@ const app = Vue.createApp({
                     style: 'display: flex; align-items: center; gap:10px;'
                 }, [
                     h('div', {
-                        class: 'circle',
-                        style: 'background: #CCC;'
+                        class: {
+                            'circle': 1===1,
+                            'passed': currentStep >= i + 1,
+                            'active': currentStep === i + 1
+                        }
                     }, i + 1),
                     h('span', {
                         class: 'a',
@@ -64,9 +67,7 @@ const app = Vue.createApp({
         moveToNextStep() {
             currentStep++
 
-            if (currentStep > 1) {
-                this.$forceUpdate()
-            }
+            this.$forceUpdate()
             if (currentStep > 5) {
                 alert('Поздравляем вы изучили основные темы Vue')
             }
@@ -77,9 +78,7 @@ const app = Vue.createApp({
         moveToPreviousStep() {
             currentStep--
 
-            if (currentStep < 2) {
-                this.$forceUpdate()
-            }
+            this.$forceUpdate()
             if (currentStep < 1) {
                 currentStep = 1
                 alert('До основ нет этапов.')
