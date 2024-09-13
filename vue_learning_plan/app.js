@@ -91,7 +91,8 @@ const app = Vue.createApp({
             class: {
                 'btn': 1===1,
                 'invisible': currentStep <= 5
-            }
+            },
+            onclick: () => this.moveToAnotherStep(1)
         }, 'Начать заново')
         let buttons = h('div', {
             style: 'padding-top: 20px'
