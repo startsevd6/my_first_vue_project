@@ -12,37 +12,24 @@ const app = Vue.createApp({
                 'В данном блоке вы узнаете всё о том, как работает мультиязычность во Vue. Мы создадим миниклон Gmail в данном блоке, где вы на практике увидите как работать с динамическим роутером.',
                 'В блоке вы узнаете все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Всё на практике.',
                 'Одним из наиболее важных обновлений во Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете всё, чтобы полностью пользоваться данным синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'
-            ]
+            ],
+            textOnForwardButton: 'Вперёд'
         }
     },
     methods: {
-        moveToNextStep() {
-            currentStep++
-
-            this.$forceUpdate()
-            if (currentStep > 5) {
-                alert('Поздравляем вы изучили основные темы Vue')
+        moveToAnotherStep(step) {
+            currentStep = step
+            if (currentStep < 5) {
+                this.textOnForwardButton = 'Вперёд'
             }
-
-            console.log(currentStep)
-        },
-
-        moveToPreviousStep() {
-            currentStep--
-
+            if (currentStep === 5) {
+                this.textOnForwardButton = 'Закончить'
+            }
             this.$forceUpdate()
             if (currentStep < 1) {
                 currentStep = 1
                 alert('До основ нет этапов.')
             }
-
-            console.log(currentStep)
-        },
-
-        moveToAnotherStep(step) {
-            currentStep = step
-            this.$forceUpdate()
-
             console.log(currentStep)
         }
     },
@@ -51,7 +38,7 @@ const app = Vue.createApp({
 
         let p = h('p', {
             style: 'display: flex; align-items: center; min-height: 109px;'
-        }, this.description[currentStep - 1])
+        }, currentStep <= 5 ? this.description[currentStep - 1] : this.description[4])
 
         const descriptionsOfChildrenElements = ['Основы', 'Компоненты', 'Роутер', 'Vuex', 'Composition']
         const children = []
@@ -83,21 +70,32 @@ const app = Vue.createApp({
         let backButton = h('button', {
             class: {
                 'btn': 1===1,
-                disabled: currentStep < 2
+                disabled: currentStep < 2,
+                'invisible': currentStep > 5
             },
             onclick: () => {
-                this.moveToPreviousStep()
+                this.moveToAnotherStep(currentStep - 1)
             }
         }, 'Назад')
         let forwardButton = h('button', {
-            class: 'btn primary',
+            class: {
+                'btn': 1===1,
+                'primary': 1===1,
+                'invisible': currentStep > 5
+            },
             onclick: () => {
-                this.moveToNextStep()
+                this.moveToAnotherStep(currentStep + 1)
             }
-        }, 'Вперёд')
+        }, this.textOnForwardButton)
+        let startOverButton = h('button', {
+            class: {
+                'btn': 1===1,
+                'invisible': currentStep <= 5
+            }
+        }, 'Начать заново')
         let buttons = h('div', {
             style: 'padding-top: 20px'
-        }, [backButton, forwardButton])
+        }, [backButton, forwardButton, startOverButton])
 
         return h('div', {
             class: 'container'
