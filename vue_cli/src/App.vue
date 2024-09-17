@@ -1,14 +1,44 @@
 <template>
-  <the-header></the-header>
+  <div class="container pt-1">
+    <div class="card">
+      <h2>Актуальные новости {{ now }}</h2>
+    </div>
+  </div>
+
+  <app-news
+      v-for="item in news"
+      :key="item.id"
+      :title="item.title"
+      :id="item.id"
+      v-model:isOpen="item.isOpen"
+  ></app-news>
 </template>
 
 <script>
 
+import appNews from "@/AppNews.vue";
+
 export default {
   data() {
     return {
-      title: 'The header from Data'
+      now: new Date().toLocaleDateString(),
+      isOpen: false,
+      news: [
+        {
+          title: 'Выборы в США 5.10.24',
+          id: 1,
+          isOpen: false
+        },
+        {
+          title: 'Vue 4 ещё не вышел',
+          id: 2,
+          isOpen: false
+        }
+      ]
     }
+  },
+  components: {
+    'app-news': appNews
   }
 }
 </script>
