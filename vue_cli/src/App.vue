@@ -1,11 +1,15 @@
 <template>
-  <h1>Hello Vue 3!</h1>
+  <the-header></the-header>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  data() {
+    return {
+      title: 'The header from Data'
+    }
+  }
 }
 </script>
 
