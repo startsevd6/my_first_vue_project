@@ -2,6 +2,7 @@
   <div class="container pt-1">
     <div class="card">
       <h2>Актуальные новости {{ now }}</h2>
+      <span>Открыто: {{ openRate }}</span>
     </div>
   </div>
 
@@ -10,6 +11,7 @@
       :key="item.id"
       :title="item.title"
       :id="item.id"
+      v-on:open-news="openRate++"
       v-model:isOpen="item.isOpen"
   ></app-news>
 </template>
@@ -22,6 +24,7 @@ export default {
   data() {
     return {
       now: new Date().toLocaleDateString(),
+      openRate : 0,
       isOpen: false,
       news: [
         {

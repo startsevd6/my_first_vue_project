@@ -41,6 +41,9 @@
       toggle() {
         this.isOpenLocal = !this.isOpenLocal;
         this.$emit('update:isOpen', this.isOpenLocal);
+        if (this.isOpenLocal) {
+          this.$emit('open-news')
+        }
       }
     }
   }
