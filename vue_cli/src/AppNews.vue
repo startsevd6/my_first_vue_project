@@ -13,6 +13,9 @@
         type: String,
         required: true
       },
+      emits: {
+        'open-news': null
+      },
       id: {
         type: Number,
         required: true

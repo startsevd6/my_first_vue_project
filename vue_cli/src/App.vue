@@ -11,7 +11,7 @@
       :key="item.id"
       :title="item.title"
       :id="item.id"
-      v-on:open-news="openRate++"
+      @open-news="openRate++"
       v-model:isOpen="item.isOpen"
   ></app-news>
 </template>
