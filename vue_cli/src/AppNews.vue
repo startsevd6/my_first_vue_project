@@ -20,7 +20,13 @@
       },
       emits: {
         'open-news': null,
-        'read-news': null
+        'read-news'(id) {
+          if (id) {
+            return true
+          }
+          console.warn('Нет параметра id для emit read-news')
+          return false
+        }
       },
       id: {
         type: Number,
