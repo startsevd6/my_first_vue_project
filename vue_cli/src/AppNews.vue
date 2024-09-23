@@ -2,6 +2,7 @@
   <div class="card">
     <h3>{{ title }}</h3>
     <button class="btn" @click="toggle">{{ isOpenLocal ? 'Закрыть' : 'Открыть' }}</button>
+    <button class="btn danger" v-if="wasRead" @click="unmark">Отметить непрочитанной</button>
     <div v-if="isOpenLocal">
       <hr />
       <p v-if="isOpen">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores autem consequuntur debitis dicta dolore doloremque dolores, earum exercitationem id impedit molestiae non, nostrum optio placeat quam quasi reprehenderit repudiandae sit, soluta ullam veniam voluptates!</p>
@@ -26,7 +27,8 @@
           }
           console.warn('Нет параметра id для emit read-news')
           return false
-        }
+        },
+        'unmark': null
       },
       id: {
         type: Number,
@@ -63,6 +65,9 @@
       mark() {
         this.isOpenLocal = false
         this.$emit('read-news', this.id)
+      },
+      unmark() {
+        this.$emit('unmark', this.id)
       }
     }
   }
